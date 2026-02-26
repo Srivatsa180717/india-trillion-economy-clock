@@ -97,113 +97,113 @@ const STATES_DATA = [
     // ---- 16 major states from the PDF table ----
     {
         name: "Maharashtra", code: "MH",
-        // 2026: $556.1B, 2030: ~$1.00T, 2035: ~$1.76T, 2040: ~$3.11T, 2047: ~$6.87T
-        gdpAnchors: { 2026: 556.1, 2030: 1000, 2035: 1760, 2040: 3110, 2047: 6870 },
+        // 2024: ~$530B (historical GSDP), 2026: $556.1B, 2030: ~$1.00T, 2035: ~$1.76T, 2040: ~$3.11T, 2047: ~$6.87T
+        gdpAnchors: { 2024: 530, 2026: 556.1, 2030: 1000, 2035: 1760, 2040: 3110, 2047: 6870 },
         focusSectors: "Finance, IT, media, autos, engineering, chemicals, ports/logistics",
         cumInvestment: 2.8
     },
     {
         name: "Tamil Nadu", code: "TN",
-        // 2026: $374.3B, 2030: ~$1.00T, 2035: ~$1.72T, 2040: ~$2.97T, 2047: ~$6.36T
-        gdpAnchors: { 2026: 374.3, 2030: 1000, 2035: 1720, 2040: 2970, 2047: 6360 },
+        // 2024: ~$310B, 2026: $374.3B
+        gdpAnchors: { 2024: 310, 2026: 374.3, 2030: 1000, 2035: 1720, 2040: 2970, 2047: 6360 },
         focusSectors: "Autos, electronics, textiles, IT, EV hubs, export clusters, R&D",
         cumInvestment: 4.0
     },
     {
         name: "Karnataka", code: "KA",
-        // 2026: $343.9B, 2030: ~$0.55T, 2035: ~$1.00T, 2040: ~$1.80T, 2047: ~$4.11T
-        gdpAnchors: { 2026: 343.9, 2030: 550, 2035: 1000, 2040: 1800, 2047: 4110 },
+        // 2024: ~$290B, 2026: $343.9B
+        gdpAnchors: { 2024: 290, 2026: 343.9, 2030: 550, 2035: 1000, 2040: 1800, 2047: 4110 },
         focusSectors: "IT/ITES, startups, deep tech, biotech, digital exports, R&D",
         cumInvestment: 4.2
     },
     {
         name: "Gujarat", code: "GJ",
-        // 2026: $333.6B, 2030: ~$0.54T, 2035: ~$1.00T, 2040: ~$1.69T, 2047: ~$3.50T
-        gdpAnchors: { 2026: 333.6, 2030: 540, 2035: 1000, 2040: 1690, 2047: 3500 },
+        // 2024: ~$298B, 2026: $333.6B
+        gdpAnchors: { 2024: 298, 2026: 333.6, 2030: 540, 2035: 1000, 2040: 1690, 2047: 3500 },
         focusSectors: "Petrochemicals, pharma, ports, green hydrogen, export manufacturing",
         cumInvestment: 4.3
     },
     {
         name: "Uttar Pradesh", code: "UP",
-        // 2026: $350.4B, 2030: ~$0.56T, 2035: ~$1.00T, 2040: ~$1.65T, 2047: ~$3.31T
-        gdpAnchors: { 2026: 350.4, 2030: 560, 2035: 1000, 2040: 1650, 2047: 3310 },
+        // 2024: ~$288B, 2026: $350.4B
+        gdpAnchors: { 2024: 288, 2026: 350.4, 2030: 560, 2035: 1000, 2040: 1650, 2047: 3310 },
         focusSectors: "Construction, electronics, food processing, logistics, human capital",
         cumInvestment: 4.2
     },
     {
         name: "Telangana", code: "TS",
-        // 2026: $206.5B, 2030: ~$0.42T, 2035: ~$1.00T, 2040: ~$1.76T, 2047: ~$3.90T
-        gdpAnchors: { 2026: 206.5, 2030: 420, 2035: 1000, 2040: 1760, 2047: 3900 },
+        // 2024: ~$165B, 2026: $206.5B
+        gdpAnchors: { 2024: 165, 2026: 206.5, 2030: 420, 2035: 1000, 2040: 1760, 2047: 3900 },
         focusSectors: "IT/ITES, GCCs, pharma/biotech, life sciences, AI platforms",
         cumInvestment: 5.1
     },
     {
         name: "West Bengal", code: "WB",
-        // 2026: $233.9B, 2030: ~$0.35T, 2035: ~$0.60T, 2040: ~$1.00T, 2047: ~$1.95T
-        gdpAnchors: { 2026: 233.9, 2030: 350, 2035: 600, 2040: 1000, 2047: 1950 },
+        // 2024: ~$205B, 2026: $233.9B
+        gdpAnchors: { 2024: 205, 2026: 233.9, 2030: 350, 2035: 600, 2040: 1000, 2047: 1950 },
         focusSectors: "Trade, logistics, manufacturing, port-led development, IT/BPM",
         cumInvestment: 4.9
     },
     {
         name: "Rajasthan", code: "RJ",
-        // 2026: $210.2B, 2030: ~$0.33T, 2035: ~$0.57T, 2040: ~$1.00T, 2047: ~$2.01T
-        gdpAnchors: { 2026: 210.2, 2030: 330, 2035: 570, 2040: 1000, 2047: 2010 },
+        // 2024: ~$175B, 2026: $210.2B
+        gdpAnchors: { 2024: 175, 2026: 210.2, 2030: 330, 2035: 570, 2040: 1000, 2047: 2010 },
         focusSectors: "Mining, solar/wind, tourism, green energy, agro-processing",
         cumInvestment: 5.1
     },
     {
         name: "Andhra Pradesh", code: "AP",
-        // 2026: $198.0B, 2030: ~$0.31T, 2035: ~$0.56T, 2040: ~$1.00T, 2047: ~$1.95T
-        gdpAnchors: { 2026: 198.0, 2030: 310, 2035: 560, 2040: 1000, 2047: 1950 },
+        // 2024: ~$170B, 2026: $198.0B
+        gdpAnchors: { 2024: 170, 2026: 198.0, 2030: 310, 2035: 560, 2040: 1000, 2047: 1950 },
         focusSectors: "Ports, aquaculture, industrialization, food/marine processing",
         cumInvestment: 5.1
     },
     {
         name: "Madhya Pradesh", code: "MP",
-        // 2026: $187.5B, 2030: ~$0.30T, 2035: ~$0.55T, 2040: ~$1.00T, 2047: ~$1.95T
-        gdpAnchors: { 2026: 187.5, 2030: 300, 2035: 550, 2040: 1000, 2047: 1950 },
+        // 2024: ~$155B, 2026: $187.5B
+        gdpAnchors: { 2024: 155, 2026: 187.5, 2030: 300, 2035: 550, 2040: 1000, 2047: 1950 },
         focusSectors: "Agriculture, mining, logistics, food processing, mineral industries",
         cumInvestment: 5.2
     },
     {
         name: "Kerala", code: "KL",
-        // 2026: $157.6B, 2030: ~$0.22T, 2035: ~$0.35T, 2040: ~$0.54T, 2047: ~$1.00T
-        gdpAnchors: { 2026: 157.6, 2030: 220, 2035: 350, 2040: 540, 2047: 1000 },
+        // 2024: ~$138B, 2026: $157.6B
+        gdpAnchors: { 2024: 138, 2026: 157.6, 2030: 220, 2035: 350, 2040: 540, 2047: 1000 },
         focusSectors: "Tourism, health/education services, high-value agriculture, IT",
         cumInvestment: 5.4
     },
     {
         name: "Delhi", code: "DL",
-        // 2026: $152.3B, 2030: ~$0.35T, 2035: ~$0.55T, 2040: ~$0.90T, 2047: ~$1.40T
-        gdpAnchors: { 2026: 152.3, 2030: 350, 2035: 550, 2040: 900, 2047: 1400 },
+        // 2024: ~$125B, 2026: $152.3B
+        gdpAnchors: { 2024: 125, 2026: 152.3, 2030: 350, 2035: 550, 2040: 900, 2047: 1400 },
         focusSectors: "High-end services, finance, IT, digital & knowledge economy",
         cumInvestment: 5.4
     },
     {
         name: "Haryana", code: "HR",
-        // 2026: $150.7B, 2030: ~$0.22T, 2035: ~$0.34T, 2040: ~$0.53T, 2047: ~$1.00T
-        gdpAnchors: { 2026: 150.7, 2030: 220, 2035: 340, 2040: 530, 2047: 1000 },
+        // 2024: ~$130B, 2026: $150.7B
+        gdpAnchors: { 2024: 130, 2026: 150.7, 2030: 220, 2035: 340, 2040: 530, 2047: 1000 },
         focusSectors: "Autos, IT/BPM, NCR services, EVs, agritech, logistics",
         cumInvestment: 5.4
     },
     {
         name: "Odisha", code: "OD",
-        // 2026: $117.4B, 2030: ~$0.18T, 2035: ~$0.29T, 2040: ~$0.49T, 2047: ~$1.00T
-        gdpAnchors: { 2026: 117.4, 2030: 180, 2035: 290, 2040: 490, 2047: 1000 },
+        // 2024: ~$90B, 2026: $117.4B
+        gdpAnchors: { 2024: 90, 2026: 117.4, 2030: 180, 2035: 290, 2040: 490, 2047: 1000 },
         focusSectors: "Mining, metals, ports, green steel, port-based industry",
         cumInvestment: 5.6
     },
     {
         name: "Bihar", code: "BR",
-        // 2026: $117.5B, 2030: ~$0.18T, 2035: ~$0.29T, 2040: ~$0.49T, 2047: ~$1.00T
-        gdpAnchors: { 2026: 117.5, 2030: 180, 2035: 290, 2040: 490, 2047: 1000 },
+        // 2024: ~$92B, 2026: $117.5B
+        gdpAnchors: { 2024: 92, 2026: 117.5, 2030: 180, 2035: 290, 2040: 490, 2047: 1000 },
         focusSectors: "Basic manufacturing, infrastructure, urbanization, education/skills",
         cumInvestment: 5.6
     },
     {
         name: "Punjab", code: "PB",
-        // 2026: $102.4B, 2030: ~$0.16T, 2035: ~$0.27T, 2040: ~$0.47T, 2047: ~$1.00T
-        gdpAnchors: { 2026: 102.4, 2030: 160, 2035: 270, 2040: 470, 2047: 1000 },
+        // 2024: ~$88B, 2026: $102.4B
+        gdpAnchors: { 2024: 88, 2026: 102.4, 2030: 160, 2035: 270, 2040: 470, 2047: 1000 },
         focusSectors: "Agriculture, food processing, high-value crops, SMEs, renewables",
         cumInvestment: 5.7
     },
@@ -211,43 +211,43 @@ const STATES_DATA = [
     // ---- States NOT in the PDF — estimated proportionally ----
     {
         name: "Jharkhand", code: "JH",
-        gdpAnchors: { 2026: 85, 2030: 130, 2035: 220, 2040: 380, 2047: 700 },
+        gdpAnchors: { 2024: 68, 2026: 85, 2030: 130, 2035: 220, 2040: 380, 2047: 700 },
         focusSectors: "Mining, steel, heavy industry, minerals",
         cumInvestment: null
     },
     {
         name: "Chhattisgarh", code: "CG",
-        gdpAnchors: { 2026: 70, 2030: 110, 2035: 190, 2040: 330, 2047: 600 },
+        gdpAnchors: { 2024: 58, 2026: 70, 2030: 110, 2035: 190, 2040: 330, 2047: 600 },
         focusSectors: "Mining, steel, power, agriculture",
         cumInvestment: null
     },
     {
         name: "Assam", code: "AS",
-        gdpAnchors: { 2026: 65, 2030: 100, 2035: 165, 2040: 280, 2047: 520 },
+        gdpAnchors: { 2024: 52, 2026: 65, 2030: 100, 2035: 165, 2040: 280, 2047: 520 },
         focusSectors: "Tea, oil & gas, tourism, agro-industries",
         cumInvestment: null
     },
     {
         name: "Uttarakhand", code: "UK",
-        gdpAnchors: { 2026: 55, 2030: 85, 2035: 145, 2040: 250, 2047: 470 },
+        gdpAnchors: { 2024: 44, 2026: 55, 2030: 85, 2035: 145, 2040: 250, 2047: 470 },
         focusSectors: "Tourism, pharma, IT, renewable energy",
         cumInvestment: null
     },
     {
         name: "Himachal Pradesh", code: "HP",
-        gdpAnchors: { 2026: 32, 2030: 50, 2035: 85, 2040: 145, 2047: 270 },
+        gdpAnchors: { 2024: 27, 2026: 32, 2030: 50, 2035: 85, 2040: 145, 2047: 270 },
         focusSectors: "Tourism, hydro power, horticulture",
         cumInvestment: null
     },
     {
         name: "Jammu & Kashmir", code: "JK",
-        gdpAnchors: { 2026: 30, 2030: 47, 2035: 80, 2040: 135, 2047: 250 },
+        gdpAnchors: { 2024: 25, 2026: 30, 2030: 47, 2035: 80, 2040: 135, 2047: 250 },
         focusSectors: "Tourism, handicrafts, horticulture, IT",
         cumInvestment: null
     },
     {
         name: "Goa", code: "GA",
-        gdpAnchors: { 2026: 21, 2030: 33, 2035: 55, 2040: 95, 2047: 175 },
+        gdpAnchors: { 2024: 17, 2026: 21, 2030: 33, 2035: 55, 2040: 95, 2047: 175 },
         focusSectors: "Tourism, IT, pharma, mining",
         cumInvestment: null
     },
@@ -255,7 +255,7 @@ const STATES_DATA = [
         name: "Other States & UTs", code: "UT",
         // Aggregates: NE states (Sikkim, Arunachal, Meghalaya, Manipur, Mizoram,
         //   Nagaland, Tripura), Ladakh, A&N, Lakshadweep, Puducherry, Chandigarh, D&NH&DD
-        gdpAnchors: { 2026: 100, 2030: 155, 2035: 260, 2040: 440, 2047: 820 },
+        gdpAnchors: { 2024: 80, 2026: 100, 2030: 155, 2035: 260, 2040: 440, 2047: 820 },
         focusSectors: "Various — tourism, agriculture, defence, infrastructure",
         cumInvestment: null
     }
@@ -298,6 +298,14 @@ function getGrowthRate(year) {
     const curr = INDIA_GDP[y];
     if (!prev || !curr) return 0;
     return ((curr - prev) / prev) * 100;
+}
+
+/** State GDP growth rate (YoY %) — uses actual CAGR between anchors */
+function getStateGrowthRate(state, year) {
+    const gdpNow = getStateGDPForYear(state, year);
+    const gdpPrev = getStateGDPForYear(state, year - 1);
+    if (!gdpPrev || gdpPrev <= 0) return 0;
+    return ((gdpNow - gdpPrev) / gdpPrev) * 100;
 }
 
 // ──────────────────────────────────────────────────────────

@@ -381,8 +381,15 @@
         // Use live population for current year, static for others
         const pop = isLiveYear ? livePopulation : getPopulation(selectedYear);
         const pc = (currentGDP * 1e9) / (pop * 1e6);
-        $perCapita.textContent = '$' + formatCompact(pc);
-        $population.textContent = (pop / 1000).toFixed(3) + 'B';
+
+        if (isLiveYear) {
+            $perCapita.textContent = '$' + pc.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            // Compact ticking format for metric bar: "1,449.2M" 
+            $population.textContent = pop.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'M';
+        } else {
+            $perCapita.textContent = '$' + formatCompact(pc);
+            $population.textContent = (pop / 1000).toFixed(2) + 'B';
+        }
 
         // Update FX rate display
         if ($fxRate) $fxRate.textContent = '₹' + usdInrRate.toFixed(2);
@@ -391,8 +398,16 @@
     function updateIndicators() {
         const pop = isLiveYear ? livePopulation : getPopulation(selectedYear);
         const pc = (currentGDP * 1e9) / (pop * 1e6);
-        $indPerCap.textContent = '$' + formatCompact(pc);
-        $indPop.textContent = (pop / 1000).toFixed(3) + 'B';
+
+        if (isLiveYear) {
+            $indPerCap.textContent = '$' + pc.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            // Full ticking headcount for indicator card
+            const headcount = Math.floor(pop * 1e6);
+            $indPop.textContent = headcount.toLocaleString('en-IN');
+        } else {
+            $indPerCap.textContent = '$' + formatCompact(pc);
+            $indPop.textContent = (pop / 1000).toFixed(2) + 'B';
+        }
 
         const states = getAllStateGDPs(selectedYear);
         $indTrillionSt.textContent = states.filter(s => s.gdp >= 1000).length;
@@ -403,10 +418,13 @@
     function updateLiveMetrics() {
         if (!isLiveYear) return;
         const pc = (currentGDP * 1e9) / (livePopulation * 1e6);
-        $perCapita.textContent = '$' + formatCompact(pc);
-        $population.textContent = (livePopulation / 1000).toFixed(3) + 'B';
-        $indPerCap.textContent = '$' + formatCompact(pc);
-        $indPop.textContent = (livePopulation / 1000).toFixed(3) + 'B';
+        // Metric bar: compact
+        $perCapita.textContent = '$' + pc.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        $population.textContent = livePopulation.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'M';
+        // Indicator cards: full headcount
+        $indPerCap.textContent = '$' + pc.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        const headcount = Math.floor(livePopulation * 1e6);
+        $indPop.textContent = headcount.toLocaleString('en-IN');
     }
 
     // ══════════════════════════════════════
