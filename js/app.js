@@ -652,13 +652,20 @@
     }
 
     function updateCardTicks() {
+        const scale = isLiveYear ? (currentGDP / getIndiaGDP(selectedYear)) : 1;
         for (const code in stateEls) {
             const el = stateEls[code];
             if (!el) continue;
             const si = STATES_DATA.find(s => s.code === code);
             if (!si) continue;
-            const stateGDP = getStateGDPForYear(si, selectedYear) * (currentGDP / getIndiaGDP(selectedYear));
+            const stateGDP = getStateGDPForYear(si, selectedYear) * scale;
             el.textContent = '$' + fmtB(stateGDP);
+            // Keep cachedStates in sync so map tooltip & panel match cards
+            const cs = cachedStates.find(s => s.code === code);
+            if (cs) {
+                cs.gdp = stateGDP;
+                cs.sharePercent = currentGDP > 0 ? (stateGDP / currentGDP) * 100 : 0;
+            }
         }
     }
 
