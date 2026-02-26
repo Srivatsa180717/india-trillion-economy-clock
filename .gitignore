@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.env
+
+# Large source/reference files not needed for the web app
+*.pdf
+*.docx
+*.xlsx
+india_states.geojson
+india_v2.geojson
+simplify_geojson.py
+simplify_v2.py

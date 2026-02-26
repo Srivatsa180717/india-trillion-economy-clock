@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Trillion Dollar Economy Clock</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated background -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo-wrap">
+                    <img class="logo-mark" src="GFST-logo-1.png" alt="GFST">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-brand">GFST - NEXT ERA OF GOVERNANCE</span>
+                    <span class="logo-title">India's Trillion Economy Clock</span>
+                    <span class="logo-sub">Global Forum For Sustainable Transformation · Nominal GDP · Real-Time</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="header-tag">World Bank · IMF · Viksit Bharat 2047</span>
+                <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">
+                    <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="theme-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Mode Toggle -->
+        <div class="mode-bar">
+            <button class="mode-btn active" data-mode="live">
+                <span class="mode-dot live-dot"></span> LIVE
+            </button>
+            <button class="mode-btn" data-mode="timeline">
+                <span class="mode-dot"></span> TIMELINE
+            </button>
+        </div>
+
+        <!-- Vision Badge -->
+        <div class="vision-badge">
+            <span class="vb-glow"></span>
+            Compounding toward <strong>$45 Trillion</strong> by 2047
+        </div>
+
+        <!-- Year Timeline (LIVE mode) -->
+        <div class="timeline-row" id="timelineRow"></div>
+
+        <!-- Year Slider (TIMELINE mode) -->
+        <div class="slider-row hidden" id="sliderRow">
+            <div class="slider-inner">
+                <span class="slider-year" id="sliderYear">2026</span>
+                <input type="range" id="yearSlider" class="year-slider" min="2010" max="2047" value="2026" step="1">
+                <div class="slider-labels" id="sliderLabels"></div>
+            </div>
+        </div>
+
+        <!-- ===== THE CLOCK ===== -->
+        <section class="clock-hero">
+            <p class="clock-title">INDIA'S GROSS DOMESTIC PRODUCT</p>
+            <p class="clock-subtitle">Nominal GDP · USD · <span class="year-chip" id="yearChip">2026</span></p>
+            <div class="clock-display">
+                <span class="clock-dollar">$</span>
+                <div class="clock-digits" id="clockDigits"></div>
+            </div>
+            <p class="clock-human" id="clockHuman">≈ $4.88 Trillion</p>
+            <div class="clock-pulse">
+                <span class="pulse-ring"></span>
+                <span class="pulse-text" id="pulseText">+$0 every second</span>
+            </div>
+        </section>
+
+        <!-- ===== KEY METRICS ===== -->
+        <section class="metrics">
+            <div class="metric">
+                <div class="metric-label">GROWTH RATE (<span id="metricYear">2026</span>)</div>
+                <div class="metric-val" id="growthRate">0%</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">GLOBAL RANK</div>
+                <div class="metric-val" id="globalRank">#4</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">PER CAPITA <span class="fx-live">LIVE</span></div>
+                <div class="metric-val" id="perCapita">$0</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">POPULATION <span class="fx-live">LIVE</span></div>
+                <div class="metric-val" id="population">0</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">USD/INR RATE <span class="fx-live">LIVE</span></div>
+                <div class="metric-val" id="fxRate">₹83.50</div>
+            </div>
+        </section>
+
+        <!-- ===== KEY INDICATORS ===== -->
+        <section class="indicators">
+            <div class="ind-grid">
+                <div class="ind-card"><div class="ind-icon">👤</div><div class="ind-val" id="indPerCap">$0</div><div class="ind-lbl">GDP Per Capita <span class="fx-live">LIVE</span></div></div>
+                <div class="ind-card"><a href="https://www.worldometers.info/world-population/india-population/" target="_blank" rel="noopener" class="ind-link"><div class="ind-icon">👥</div><div class="ind-val" id="indPop">0</div><div class="ind-lbl">Population <span class="fx-live">LIVE</span></div></a></div>
+                <div class="ind-card"><div class="ind-icon">🏭</div><div class="ind-val" id="indTrillionStates">0</div><div class="ind-lbl">Trillion $ States</div></div>
+                <div class="ind-card"><div class="ind-icon">📈</div><div class="ind-val" id="indTarget">$45T</div><div class="ind-lbl">2047 Target</div></div>
+            </div>
+        </section>
+
+        <!-- ===== MAP ===== -->
+        <section class="map-section">
+            <div class="sec-head">
+                <h2>State-wise GDP Map</h2>
+                <div class="legend" id="mapLegend"></div>
+            </div>
+            <div class="map-grid">
+                <div class="map-canvas" id="mapContainer"></div>
+                <aside class="map-panel" id="mapPanel">
+                    <div class="mp-name" id="mpName">Hover over a state</div>
+                    <div class="mp-code" id="mpCode"></div>
+                    <div class="mp-gdp-label">GSDP</div>
+                    <div class="mp-gdp" id="mpGDP">—</div>
+                    <div class="mp-row"><span>Share</span><span id="mpShare">—</span></div>
+                    <div class="mp-row"><span>Growth</span><span id="mpGrowth">—</span></div>
+                    <div class="mp-row"><span>Per Capita</span><span id="mpPerCap">—</span></div>
+                    <div class="mp-row"><span>$1T Status</span><span id="mpTrillion">—</span></div>
+                </aside>
+            </div>
+            <div class="map-tip" id="mapTip">
+                <div class="tip-name" id="tipName"></div>
+                <div class="tip-gdp" id="tipGDP"></div>
+                <div class="tip-share" id="tipShare"></div>
+            </div>
+        </section>
+
+        <!-- ===== STATE CARDS ===== -->
+        <section class="states-section">
+            <div class="sec-head">
+                <h2>State-wise GDP</h2>
+                <div class="sort-bar">
+                    <button class="sort-btn active" data-sort="gdp">By GDP</button>
+                    <button class="sort-btn" data-sort="growth">By Growth</button>
+                    <button class="sort-btn" data-sort="alpha">A-Z</button>
+                </div>
+            </div>
+            <div class="cards-grid" id="cardsGrid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 GFST</p>
+    </footer>
+
+    <script src="js/india-map-data.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
