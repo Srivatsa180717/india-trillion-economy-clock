@@ -1,4 +1,7 @@
-/**
+#!/usr/bin/env python3
+"""Generate the complete data.js file with updated GDP projections."""
+
+content = '''/**
  * India Trillion Dollar Economy Clock — Data Module
  * GDP in billions USD (nominal)
  *
@@ -7,15 +10,15 @@
  *   - State projections (16 major): gdp_projections_v4.xlsx — year-by-year 2026-2047
  *   - State projections (8 remaining): estimated from MOSPI Statewise GVA 2023-24 + CAGR
  *   - State populations: Census 2011 + RGI/SRS differential growth, normalised to UN WPP total
- *   - National trajectory: $4T (2024) -> $53.5T (2047), constant 12.38% CAGR from 2026
+ *   - National trajectory: $4T (2024) -> $53.5T (2047) per Macro Assumptions
  */
 
 // ──────────────────────────────────────────────────────────
 // INDIA NATIONAL GDP  (billions USD, nominal)
 // Historical 2010-2024: World Bank / IMF
-// Projected 2025-2047: Smooth constant CAGR ~12.38% from 2026 to 2047
+// Projected 2025-2047: Smooth CAGR interpolation between anchor points
 //   Near-term: IMF WEO estimates for 2025-2026
-//   Target: $53.5T by 2047 (constant 12.38% CAGR from 2026)
+//   Anchors: 2030->$7.26T, 2035->$13.08T, 2040->$24.1T, 2047->$53.5T
 // ──────────────────────────────────────────────────────────
 const INDIA_GDP = {
     2010: 1676,
@@ -33,29 +36,29 @@ const INDIA_GDP = {
     2022: 3385,
     2023: 3550,
     2024: 3937,
-    // Projected — constant 12.38% CAGR from 2026 → $53.5T by 2047
+    // Projected
     2025: 4270,
     2026: 4612,
-    2027: 5180,
-    2028: 5820,
-    2029: 6550,
-    2030: 7360,
-    2031: 8270,
-    2032: 9290,
-    2033: 10440,
-    2034: 11730,
-    2035: 13190,
-    2036: 14820,
-    2037: 16650,
-    2038: 18710,
-    2039: 21030,
-    2040: 23630,
-    2041: 26560,
-    2042: 29850,
-    2043: 33540,
-    2044: 37700,
-    2045: 42360,
-    2046: 47610,
+    2027: 5170,
+    2028: 5790,
+    2029: 6480,
+    2030: 7260,
+    2031: 8170,
+    2032: 9190,
+    2033: 10340,
+    2034: 11630,
+    2035: 13080,
+    2036: 14780,
+    2037: 16700,
+    2038: 18870,
+    2039: 21330,
+    2040: 24100,
+    2041: 27010,
+    2042: 30270,
+    2043: 33920,
+    2044: 38010,
+    2045: 42600,
+    2046: 47740,
     2047: 53500
 };
 
@@ -392,3 +395,9 @@ function getAllStateGDPs(year) {
 function getNormalizedStateGDPs(year, _nationalGDP) {
     return getAllStateGDPs(year);
 }
+'''
+
+with open('js/data.js', 'w', encoding='utf-8') as f:
+    f.write(content)
+print("data.js written successfully!")
+print(f"File size: {len(content)} chars")

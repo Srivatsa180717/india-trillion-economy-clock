@@ -579,9 +579,9 @@
         const gr = gdpPrev > 0 ? ((gdpNow - gdpPrev) / gdpPrev) * 100 : 0;
         $mpGrowth.textContent = gr.toFixed(1) + '%';
 
-        const pop = getPopulation(selectedYear);
-        const popShare = sd.sharePercent / 100;
-        const sPopM = pop * popShare;
+        // Use actual state population (popMillions scaled with national growth)
+        const si2 = STATES_DATA.find(s => s.code === code);
+        const sPopM = si2 ? getStatePopulation(si2, selectedYear) : 0;
         $mpPerCap.textContent = sPopM > 0 ? '$' + formatCompact((sd.gdp * 1e9) / (sPopM * 1e6)) : '—';
 
         if (sd.gdp >= 1000) {
