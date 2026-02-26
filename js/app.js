@@ -652,20 +652,15 @@
     }
 
     function updateCardTicks() {
-        const scale = isLiveYear ? (currentGDP / getIndiaGDP(selectedYear)) : 1;
+        // State cards always show the year-end target GDP (matching Excel projections).
+        // Only the national GDP clock ticks live within the year.
         for (const code in stateEls) {
             const el = stateEls[code];
             if (!el) continue;
             const si = STATES_DATA.find(s => s.code === code);
             if (!si) continue;
-            const stateGDP = getStateGDPForYear(si, selectedYear) * scale;
+            const stateGDP = getStateGDPForYear(si, selectedYear);
             el.textContent = '$' + fmtB(stateGDP);
-            // Keep cachedStates in sync so map tooltip & panel match cards
-            const cs = cachedStates.find(s => s.code === code);
-            if (cs) {
-                cs.gdp = stateGDP;
-                cs.sharePercent = currentGDP > 0 ? (stateGDP / currentGDP) * 100 : 0;
-            }
         }
     }
 
