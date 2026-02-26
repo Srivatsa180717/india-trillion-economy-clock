@@ -1,5 +1,5 @@
 /**
- * India Trillion Dollar Economy Clock — Main Application
+ * GFST Indian Trillion Economy Clock — Main Application
  * Realistic ticking clock with digit-flip animation,
  * interactive SVG map, light/dark theme, timeline/live modes.
  */

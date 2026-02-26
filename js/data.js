@@ -1,5 +1,5 @@
 /**
- * India Trillion Dollar Economy Clock — Data Module
+ * GFST Indian Trillion Economy Clock — Data Module
  * GDP in billions USD (nominal)
  *
  * Sources:
