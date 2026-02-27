@@ -532,13 +532,15 @@
         return ring.map((c, i) => (i ? 'L' : 'M') + projX(c[0]).toFixed(1) + ',' + projY(c[1]).toFixed(1)).join('') + 'Z';
     }
 
-    // Clean 4-tier choropleth: red → blue → dark-blue → gold
-    // Intuitive at a glance: red = small, blue = medium, dark-blue = large, gold = trillion club
+    // 7-tier choropleth: reds (small) → blues (large) → gold (trillion)
     function gdpColor(b) {
         if (b >= 1000) return '#f59e0b'; // gold — trillion dollar economy
-        if (b >= 300)  return '#1d4ed8'; // dark blue — large economy
-        if (b >= 100)  return '#3b82f6'; // blue — medium economy
-        return '#ef4444';               // red — emerging / small
+        if (b >= 500)  return '#1e3a8a'; // deep blue
+        if (b >= 300)  return '#1d4ed8'; // dark blue
+        if (b >= 100)  return '#60a5fa'; // medium blue
+        if (b >= 50)   return '#f87171'; // light red
+        if (b >= 10)   return '#ef4444'; // medium red
+        return '#b91c1c';               // dark red — smallest
     }
 
     function updateMapColors() {
@@ -558,9 +560,12 @@
     function buildLegend() {
         const r = [
             {l:'$1T+',c:'#f59e0b'},
+            {l:'$500B+',c:'#1e3a8a'},
             {l:'$300B+',c:'#1d4ed8'},
-            {l:'$100B+',c:'#3b82f6'},
-            {l:'<$100B',c:'#ef4444'}
+            {l:'$100B+',c:'#60a5fa'},
+            {l:'$50B+',c:'#f87171'},
+            {l:'$10B+',c:'#ef4444'},
+            {l:'<$10B',c:'#b91c1c'}
         ];
         $mapLegend.innerHTML = r.map(x =>
             `<div class="legend-item"><span class="legend-swatch" style="background:${x.c}"></span>${x.l}</div>`
