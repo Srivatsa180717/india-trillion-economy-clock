@@ -78,7 +78,7 @@
         setupSortButtons();
         renderMap();
         buildLegend();
-        fetchExchangeRate();
+        startFxRefresh();
         initLivePopulation();
         setYear(selectedYear);
         startClock();
@@ -105,34 +105,71 @@
     }
 
     // ══════════════════════════════════════
-    //  EXCHANGE RATE (live USD/INR)
+    //  EXCHANGE RATE (live USD/INR) — cascading multi-API
+    //  Sources (tried in order):
+    //   1. open.er-api.com — free, no key, ~daily updates
+    //   2. cdn.jsdelivr.net/@fawazahmed0/currency-api — free, open-source, daily
+    //   3. v6.exchangerate-api.com — free tier, daily
+    //   Fallback: hardcoded ₹83.50 (last-resort only)
     // ══════════════════════════════════════
-    function fetchExchangeRate() {
-        fetch('https://open.er-api.com/v6/latest/USD')
-            .then(r => r.json())
-            .then(data => {
-                if (data && data.rates && data.rates.INR) {
-                    usdInrRate = data.rates.INR;
-                    updateFxDisplay();
-                }
-            })
-            .catch(() => { /* use fallback rate */ });
+    let fxSource = 'fallback';  // tracks which API succeeded
+
+    const FX_APIS = [
+        {
+            name: 'open.er-api.com',
+            url: 'https://open.er-api.com/v6/latest/USD',
+            extract: data => (data && data.rates && data.rates.INR) ? data.rates.INR : null
+        },
+        {
+            name: 'fawazahmed0/currency-api',
+            url: 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json',
+            extract: data => (data && data.usd && data.usd.inr) ? data.usd.inr : null
+        },
+        {
+            name: 'exchangerate-api.com',
+            url: 'https://v6.exchangerate-api.com/v6/latest/USD',
+            extract: data => (data && data.conversion_rates && data.conversion_rates.INR) ? data.conversion_rates.INR : null
+        }
+    ];
+
+    async function tryFetchRate(api, timeoutMs) {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), timeoutMs || 8000);
+        try {
+            const resp = await fetch(api.url, { signal: ctrl.signal });
+            const data = await resp.json();
+            const rate = api.extract(data);
+            if (rate && rate > 50 && rate < 200) return { rate, name: api.name };
+        } catch (_) { /* next */ } finally { clearTimeout(timer); }
+        return null;
+    }
+
+    async function fetchExchangeRate() {
+        for (const api of FX_APIS) {
+            const result = await tryFetchRate(api, 8000);
+            if (result) {
+                usdInrRate = result.rate;
+                fxSource = result.name;
+                updateFxDisplay();
+                return;
+            }
+        }
+        // All APIs failed — keep hardcoded fallback
+        fxSource = 'fallback (₹83.50)';
+        updateFxDisplay();
+    }
+
+    function startFxRefresh() {
+        fetchExchangeRate();
         // Refresh every 30 minutes
-        setInterval(() => {
-            fetch('https://open.er-api.com/v6/latest/USD')
-                .then(r => r.json())
-                .then(data => {
-                    if (data && data.rates && data.rates.INR) {
-                        usdInrRate = data.rates.INR;
-                        updateFxDisplay();
-                    }
-                })
-                .catch(() => {});
-        }, 30 * 60 * 1000);
+        setInterval(fetchExchangeRate, 30 * 60 * 1000);
     }
 
     function updateFxDisplay() {
-        if ($fxRate) $fxRate.textContent = '₹' + usdInrRate.toFixed(2);
+        if ($fxRate) {
+            $fxRate.textContent = '₹' + usdInrRate.toFixed(2);
+            $fxRate.title = 'Source: ' + fxSource;
+        }
     }
 
     // ══════════════════════════════════════
@@ -438,11 +475,7 @@
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         svg.setAttribute('class', 'india-map-svg');
 
-        const CODE_MAP = {
-            AN:'UT',AR:'UT',CH:'UT',DN:'UT',DD:'UT',
-            LD:'UT',MN:'UT',ML:'UT',MZ:'UT',NL:'UT',
-            PY:'UT',SK:'UT',TR:'UT',LA:'UT'
-        };
+        const CODE_MAP = {};
 
         INDIA_MAP_DATA.forEach(f => {
             const dc = f.d || CODE_MAP[f.c] || f.c;
@@ -738,7 +771,42 @@
     }
 
     // ══════════════════════════════════════
+    //  SOURCES MODAL
+    // ══════════════════════════════════════
+    function initSourcesModal() {
+        const overlay = document.getElementById('sourcesOverlay');
+        const openBtn = document.getElementById('openSources');
+        const closeBtn = document.getElementById('closeSources');
+        if (!overlay || !openBtn) return;
+
+        function show() {
+            overlay.style.display = 'flex';
+            // force reflow then add visible for transition
+            void overlay.offsetWidth;
+            overlay.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+        function hide() {
+            overlay.classList.remove('visible');
+            document.body.style.overflow = '';
+            setTimeout(function() { overlay.style.display = 'none'; }, 260);
+        }
+
+        openBtn.addEventListener('click', function(e) { e.preventDefault(); show(); });
+        if (closeBtn) closeBtn.addEventListener('click', hide);
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) hide();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && overlay.classList.contains('visible')) hide();
+        });
+    }
+
+    // ══════════════════════════════════════
     //  START
     // ══════════════════════════════════════
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function() {
+        init();
+        initSourcesModal();
+    });
 })();

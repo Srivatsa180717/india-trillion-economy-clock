@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GFST Indian Trillion Economy Clock</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -155,11 +155,77 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 GFST</p>
+        <p>&copy; 2025 GFST &nbsp;|&nbsp; <a href="#" id="openSources">Data Sources & Methodology</a></p>
     </footer>
 
-    <script src="js/india-map-data.js"></script>
-    <script src="js/data.js?v=4"></script>
-    <script src="js/app.js?v=4"></script>
+    <!-- ===== DATA SOURCES MODAL ===== -->
+    <div class="sources-overlay" id="sourcesOverlay">
+        <div class="sources-modal">
+            <button class="sources-close" id="closeSources" title="Close">&times;</button>
+            <h2>Data Sources &amp; Methodology</h2>
+
+            <h3>National GDP</h3>
+            <ul>
+                <li><a href="https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=IN" target="_blank" rel="noopener">World Bank — India GDP (current US$)</a> — Historical 2010-2024</li>
+                <li><a href="https://www.imf.org/en/Publications/WEO" target="_blank" rel="noopener">IMF World Economic Outlook</a> — Near-term projections</li>
+                <li><a href="https://www.niti.gov.in/sites/default/files/2023-01/viksitbharat%402047_0.pdf" target="_blank" rel="noopener">NITI Aayog — Viksit Bharat @2047</a> — $53.5T target trajectory (12.38% CAGR)</li>
+            </ul>
+
+            <h3>State-wise GSDP (16 Major States)</h3>
+            <ul>
+                <li><strong>India Trillion Economy Table V4</strong> — Year-by-year state projections 2026-2047 (proprietary GFST research based on MOSPI data)</li>
+                <li><a href="https://mospi.gov.in/" target="_blank" rel="noopener">MOSPI — Ministry of Statistics & Programme Implementation</a> — State GVA/GSDP base data (FY 2023-24)</li>
+            </ul>
+
+            <h3>State-wise GSDP (7 Remaining States)</h3>
+            <ul>
+                <li>Jharkhand, Chhattisgarh, Assam, Uttarakhand, Himachal Pradesh, J&amp;K, Goa</li>
+                <li>Base: <a href="https://mospi.gov.in/" target="_blank" rel="noopener">MOSPI GVA 2023-24</a>; projected to match national GDP (residual reconciliation)</li>
+            </ul>
+
+            <h3>NE States &amp; Union Territories (13 Entities)</h3>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/List_of_Indian_states_and_union_territories_by_GDP" target="_blank" rel="noopener">Wikipedia — List of Indian states and UTs by GDP</a> (sourced from MOSPI/RBI)</li>
+                <li>Base year: FY 2023-24 (₹ billion) → converted to CY 2024 USD at ₹83.5/$ with ×1.05 overlap adjustment</li>
+                <li>Entity-specific growth rates (10-12.5% USD) based on historical MOSPI trends</li>
+            </ul>
+
+            <h3>Population</h3>
+            <ul>
+                <li><a href="https://www.worldometers.info/world-population/india-population/" target="_blank" rel="noopener">Worldometers — India Population (live)</a></li>
+                <li><a href="https://population.un.org/wpp/" target="_blank" rel="noopener">UN World Population Prospects 2024</a> — Projections to 2047</li>
+                <li>State populations: Census 2011 base, scaled proportionally with national growth</li>
+            </ul>
+
+            <h3>Exchange Rate (USD/INR)</h3>
+            <ul>
+                <li>Live rate fetched from three APIs in cascade (redundant):</li>
+                <li>1. <a href="https://open.er-api.com/" target="_blank" rel="noopener">open.er-api.com</a></li>
+                <li>2. <a href="https://github.com/fawazahmed0/exchange-api" target="_blank" rel="noopener">fawazahmed0/currency-api</a> (via jsDelivr CDN)</li>
+                <li>3. <a href="https://www.exchangerate-api.com/" target="_blank" rel="noopener">exchangerate-api.com</a></li>
+                <li>Fallback: ₹83.50 hardcoded (used only if all three APIs fail)</li>
+            </ul>
+
+            <h3>Map Geometry</h3>
+            <ul>
+                <li><a href="https://github.com/datameet/maps" target="_blank" rel="noopener">DataMeet India Maps</a> — Open-source GeoJSON boundaries</li>
+                <li>Simplified to ~36 features; includes Telangana, Ladakh, D&amp;NH+D&amp;D merger</li>
+            </ul>
+
+            <h3>Methodology Notes</h3>
+            <ul>
+                <li>All GDP figures are <strong>nominal USD</strong> (not PPP, not inflation-adjusted)</li>
+                <li>Inter-anchor-year interpolation uses CAGR (exponential), not linear</li>
+                <li>"Live" ticking derives per-second increment from annual GDP growth, for visual effect only</li>
+                <li>State totals are reconciled to equal the national GDP for every projection year</li>
+            </ul>
+
+            <p class="sources-updated">Last data update: February 2026</p>
+        </div>
+    </div>
+
+    <script src="js/india-map-data.js?v=7"></script>
+    <script src="js/data.js?v=7"></script>
+    <script src="js/app.js?v=7"></script>
 </body>
 </html>

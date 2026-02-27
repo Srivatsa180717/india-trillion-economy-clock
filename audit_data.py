@@ -4,6 +4,9 @@ import re, math
 with open('js/data.js', 'r', encoding='utf-8') as f:
     content = f.read()
 
+# Strip single-line JS comments so regex can span comment lines
+content_clean = re.sub(r'//[^\n]*', '', content)
+
 # Extract INDIA_GDP
 gdp_match = re.search(r'const INDIA_GDP\s*=\s*\{([^}]+)\}', content)
 india_gdp = {}
@@ -19,7 +22,7 @@ for m in re.finditer(r'(\d{4}):\s*([\d.]+)', pop_match.group(1)):
 # Extract states
 states = []
 pattern = r'name:\s*"([^"]+)",\s*code:\s*"([^"]+)",\s*popMillions:\s*([\d.]+),\s*gdpAnchors:\s*\{([^}]+)\}'
-for m in re.finditer(pattern, content):
+for m in re.finditer(pattern, content_clean):
     name, code, pop, anchors_str = m.group(1), m.group(2), float(m.group(3)), m.group(4)
     anchors = {}
     for a in re.finditer(r'(\d{4}):\s*([\d.]+)', anchors_str):
