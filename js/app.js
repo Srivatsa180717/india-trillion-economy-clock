@@ -535,9 +535,9 @@
     // 7-tier choropleth: reds (small) → light blues (large) → gold (trillion)
     function gdpColor(b) {
         if (b >= 1000) return '#f59e0b'; // gold — trillion dollar economy
-        if (b >= 500)  return '#38bdf8'; // sky blue
-        if (b >= 300)  return '#7dd3fc'; // light sky blue
-        if (b >= 100)  return '#bae6fd'; // pale sky blue
+        if (b >= 500)  return '#0ea5e9'; // sky blue
+        if (b >= 300)  return '#38bdf8'; // light sky blue
+        if (b >= 100)  return '#7dd3fc'; // pale sky blue
         if (b >= 50)   return '#f87171'; // light red
         if (b >= 10)   return '#ef4444'; // medium red
         return '#b91c1c';               // dark red — smallest
@@ -560,9 +560,9 @@
     function buildLegend() {
         const r = [
             {l:'$1T+',c:'#f59e0b'},
-            {l:'$500B+',c:'#38bdf8'},
-            {l:'$300B+',c:'#7dd3fc'},
-            {l:'$100B+',c:'#bae6fd'},
+            {l:'$500B+',c:'#0ea5e9'},
+            {l:'$300B+',c:'#38bdf8'},
+            {l:'$100B+',c:'#7dd3fc'},
             {l:'$50B+',c:'#f87171'},
             {l:'$10B+',c:'#ef4444'},
             {l:'<$10B',c:'#b91c1c'}
