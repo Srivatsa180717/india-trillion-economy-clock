@@ -394,7 +394,7 @@
             if (selectedYear < new Date().getFullYear()) {
                 $pulseText.textContent = 'Historical data (year-end)';
             } else {
-                $pulseText.textContent = 'Projected data (start-of-year)';
+                $pulseText.textContent = 'Projected data (end-of-year)';
             }
             $pulseText.style.color = 'var(--text-3)';
             return;
