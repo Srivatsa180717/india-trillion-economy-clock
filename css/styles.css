@@ -466,10 +466,11 @@ body{
 /* Legend */
 .legend{display:flex;gap:10px;flex-wrap:wrap}
 .legend-item{
-  display:flex;align-items:center;gap:5px;
-  font-size:11px;color:var(--text-2);font-weight:500;
+  display:flex;align-items:center;gap:7px;
+  font-size:14px;color:var(--text-1);font-weight:600;
+  letter-spacing:.02em;
 }
-.legend-swatch{width:14px;height:14px;border-radius:3px;display:inline-block}
+.legend-swatch{width:20px;height:20px;border-radius:4px;display:inline-block;border:1px solid rgba(255,255,255,.15)}
 
 /* Map Panel */
 .map-panel{
@@ -718,8 +719,8 @@ body{
   .mp-gdp{font-size:20px}
   .mp-row{font-size:12px;padding:6px 0}
   .legend{gap:6px}
-  .legend-item{font-size:9px}
-  .legend-swatch{width:10px;height:10px}
+  .legend-item{font-size:12px}
+  .legend-swatch{width:16px;height:16px}
 
   /* Map tooltip */
   .map-tip{padding:8px 12px;min-width:130px}

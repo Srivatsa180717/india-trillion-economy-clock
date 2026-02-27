@@ -532,13 +532,13 @@
         return ring.map((c, i) => (i ? 'L' : 'M') + projX(c[0]).toFixed(1) + ',' + projY(c[1]).toFixed(1)).join('') + 'Z';
     }
 
-    // Clean 4-tier choropleth: gray → blue → dark-blue → gold
-    // Intuitive at a glance: darker = bigger economy, gold = trillion club
+    // Clean 4-tier choropleth: red → blue → dark-blue → gold
+    // Intuitive at a glance: red = small, blue = medium, dark-blue = large, gold = trillion club
     function gdpColor(b) {
         if (b >= 1000) return '#f59e0b'; // gold — trillion dollar economy
         if (b >= 300)  return '#1d4ed8'; // dark blue — large economy
         if (b >= 100)  return '#3b82f6'; // blue — medium economy
-        return '#94a3b8';               // gray — emerging / small
+        return '#ef4444';               // red — emerging / small
     }
 
     function updateMapColors() {
@@ -560,7 +560,7 @@
             {l:'$1T+',c:'#f59e0b'},
             {l:'$300B+',c:'#1d4ed8'},
             {l:'$100B+',c:'#3b82f6'},
-            {l:'<$100B',c:'#94a3b8'}
+            {l:'<$100B',c:'#ef4444'}
         ];
         $mapLegend.innerHTML = r.map(x =>
             `<div class="legend-item"><span class="legend-swatch" style="background:${x.c}"></span>${x.l}</div>`
