@@ -645,11 +645,15 @@
 
         if (sortMode === 'gdp') states.sort((a, b) => b.gdp - a.gdp);
         else if (sortMode === 'growth') {
-            states.sort((a, b) => {
-                const ga = (a.gdpAnchors || {})[2047] / ((a.gdpAnchors || {})[2026] || 1);
-                const gb = (b.gdpAnchors || {})[2047] / ((b.gdpAnchors || {})[2026] || 1);
-                return gb - ga;
+            // Pre-compute YoY growth rates so sort order matches displayed values
+            const growthMap = {};
+            states.forEach(s => {
+                const si = STATES_DATA.find(x => x.code === s.code);
+                const gdpNow = si ? getStateGDPForYear(si, selectedYear) : 0;
+                const gdpPrev = si ? getStateGDPForYear(si, selectedYear - 1) : 0;
+                growthMap[s.code] = gdpPrev > 0 ? (gdpNow - gdpPrev) / gdpPrev : 0;
             });
+            states.sort((a, b) => growthMap[b.code] - growthMap[a.code]);
         } else states.sort((a, b) => a.name.localeCompare(b.name));
 
         $cardsGrid.innerHTML = '';
